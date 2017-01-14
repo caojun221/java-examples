@@ -2,19 +2,13 @@ package io.caojun221.examples.crypto;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
-import java.security.InvalidKeyException;
 import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.junit.Test;
@@ -28,22 +22,20 @@ public class CipherTest {
 
         byte[] randomBytes = randomBytes();
         String secret = bytesToHex(randomBytes);
-        String encrypted = aesEncryption(secret, "hello");
+        String encrypted = aesEncryption(secret, "u6aa4cbbd9d81bd4eb0af00017d3759ca.abc");
         System.out.println(encrypted);
         String decrypted = aesDecryption(secret, encrypted);
         System.out.println(decrypted);
     }
 
     private static String aesDecryption(String secret, String encrypted)
-            throws UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException,
-                   InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+            throws Exception {
         byte[] decoded = Base64.getDecoder().decode(encrypted.getBytes("UTF-8"));
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         byte[] secretBytes = hexToBytes(secret);
         Key key = new SecretKeySpec(secretBytes, "AES");
         cipher.init(Cipher.DECRYPT_MODE, key);
-        cipher.update(decoded);
-        return new String(cipher.doFinal(), "UTF-8");
+        return new String(cipher.doFinal(decoded), "UTF-8");
     }
 
     private static String aesEncryption(String secret, String message)
@@ -52,8 +44,7 @@ public class CipherTest {
         byte[] secretBytes = hexToBytes(secret);
         Key key = new SecretKeySpec(secretBytes, "AES");
         cipher.init(Cipher.ENCRYPT_MODE, key);
-        cipher.update(message.getBytes());
-        return new String(Base64.getEncoder().encode(cipher.doFinal()), "UTF-8");
+        return new String(Base64.getEncoder().encode(cipher.doFinal(message.getBytes("UTF-8"))), "UTF-8");
     }
 
     @Test
