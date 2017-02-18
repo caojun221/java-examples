@@ -20,6 +20,12 @@
 
   <dependencies>
 
+    <!--guava-->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>21.0</version>
+    </dependency>
     <!--logback-->
     <dependency>
       <groupId>ch.qos.logback</groupId>
