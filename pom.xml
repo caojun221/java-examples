@@ -20,6 +20,12 @@
 
   <dependencies>
 
+    <!--mybatis-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.4.1</version>
+    </dependency>
     <!--guava-->
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -38,6 +44,12 @@
       <version>LATEST</version>
     </dependency>
 
+    <!--mysql-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.40</version>
+    </dependency>
     <!--h2 database-->
     <dependency>
       <groupId>com.h2database</groupId>
